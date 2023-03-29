@@ -4,23 +4,24 @@ on:
   push:
     tags:
       - 'v*'
-    branches:
-      - main
 
 jobs:
   publish:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: Set up Node.js
-        uses: actions/setup-node@v2
+      - uses: actions/checkout@v3
+      - name: Authenticate with NPM registry
+        uses: actions/setup-node@v3
         with:
           node-version: '16.x'
+          registry-url: 'https://registry.npmjs.org'
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.NPM_AUTH_TOKEN}}
       - name: Install dependencies
         run: npm ci
-      - name: Build and publish to npm
-        run: |
-          npm run build
-          npm publish
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
+      - name: Run tests
+        run: npm run test:ci
+      - name: Build
+        run: npm run build
+      - name: Publish package to NPM
+        run: npm publish
