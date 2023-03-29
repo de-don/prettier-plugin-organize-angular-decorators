@@ -1,0 +1,10 @@
+{
+  "componentDecoratorOrder": [
+    "standalone",
+    "selector",
+    "templateUrl",
+    "styleUrls",
+    "$SPREAD$",
+    "styles"
+  ]
+}

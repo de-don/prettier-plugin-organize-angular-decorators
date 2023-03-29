@@ -1,0 +1,7 @@
+/artifacts
+/src
+/.editorconfig
+/.prettierignore
+/.prettierrc
+/jest.config.ts
+/tsconfig.json

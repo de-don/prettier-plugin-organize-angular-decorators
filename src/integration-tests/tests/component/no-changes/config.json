@@ -1,0 +1,8 @@
+{
+  "componentDecoratorOrder": [
+    "standalone",
+    "selector",
+    "templateUrl",
+    "styleUrls"
+  ]
+}
