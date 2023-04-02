@@ -29,3 +29,23 @@ After that, configure it in `.prettierrc` or `prettierrc.js`
   ]
 }
 ```
+
+If you want prettify decorators only in some directories, define patterns in `angularOrganizePatterns`:
+
+```json
+{
+  "plugins": ["prettier-plugin-organize-angular-decorators"],
+  "componentDecoratorOrder": [
+    "standalone",
+    "selector",
+    "templateUrl",
+    "styleUrls",
+    "changeDetection",
+    "providers"
+  ],
+  "angularOrganizePatterns": [
+    "./src/shared/**/*",
+    "./src/modules/**/shared/**/*"
+  ]
+}
+```

@@ -23,4 +23,11 @@ export const options: {
     description: 'Order of attributes in Directive decorator.',
     default: [{value: []}],
   },
+  angularOrganizePatterns: {
+    type: 'string',
+    category: 'Global',
+    array: true,
+    description: 'Optional list of globe patterns to apply the plugin.',
+    default: [{value: []}],
+  },
 };
