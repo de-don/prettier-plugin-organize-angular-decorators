@@ -1,9 +1,10 @@
 import {readdirSync, readFileSync} from 'fs';
 import {join} from 'path';
 import * as prettier from 'prettier';
+import * as prettierPluginEstree from 'prettier/plugins/estree';
 import * as OrganizeAttributes from '../index';
 
-const testFolder = join(__dirname, 'tests');
+const testFolder = './src/integration-tests/tests';
 const configurations = readdirSync(testFolder);
 
 configurations.forEach(configuration => {
@@ -15,7 +16,7 @@ configurations.forEach(configuration => {
     tests
       .filter(file => file !== 'extension')
       .forEach(test =>
-        it(test, () => {
+        it(test, async () => {
           const path = join(testFolder, configuration, test);
           const inputPath = join(path, `input.${extension}`);
           const expectedPath = join(path, `expected.${extension}`);
@@ -27,7 +28,8 @@ configurations.forEach(configuration => {
           const options = {
             filepath: inputPath,
             ...testConfig,
-            plugins: [OrganizeAttributes],
+            plugins: [prettierPluginEstree, OrganizeAttributes],
+            parser: 'typescript',
           };
           const prettify = (code: string) => prettier.format(code, options);
 
@@ -38,7 +40,7 @@ configurations.forEach(configuration => {
           if (expectedError) {
             expect(format).toThrow(expectedError);
           } else {
-            expect(format()).toEqual(expected);
+            expect(await format()).toEqual(expected);
           }
         }),
       );
