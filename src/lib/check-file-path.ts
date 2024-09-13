@@ -1,4 +1,4 @@
-import minimatch from 'minimatch';
+import {minimatch} from 'minimatch';
 
 export function checkFilePath(filePath: string, patterns: string[]): boolean {
   if (!patterns.length) {

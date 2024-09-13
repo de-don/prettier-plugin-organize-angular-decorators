@@ -1,4 +1,4 @@
-import {parsers as typescriptParsers} from 'prettier/parser-typescript';
+import {parsers as typescriptParsers} from 'prettier/plugins/typescript';
 import {PluginOptions} from './lib/types/plugin-options.type';
 import {wrapParser} from './lib/wrap-parser';
 

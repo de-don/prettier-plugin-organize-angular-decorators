@@ -3,13 +3,13 @@ import type {InitialOptionsTsJest} from 'ts-jest';
 const config: InitialOptionsTsJest = {
   preset: 'ts-jest/presets/js-with-ts-esm',
   testEnvironment: 'jsdom',
-  globals: {
-    // eslint-disable-next-line @typescript-eslint/naming-convention
-    'ts-jest': {
+  transform: {
+    '^.+\\.(ts|js|html)$': ['ts-jest', {
       tsconfig: {
         allowJs: true,
       },
-    },
+      useESM: true,
+    }],
   },
   clearMocks: true,
   resetModules: true,

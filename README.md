@@ -2,6 +2,11 @@
 
 Plugin for prettier to organize properties in Angular decorators
 
+## Prettier compatibility
+
+- For prettier 2.x.x use version 1.x.x of this plugin.
+- For prettier 3.x.x use version 2.x.x of this plugin.
+
 ## Usage
 
 First of all, install the plugin:
