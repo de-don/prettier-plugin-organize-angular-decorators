@@ -1,6 +1,6 @@
 {
   "name": "prettier-plugin-organize-angular-decorators",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Plugin to organize properties in Angular decorators",
   "license": "MIT",
   "repository": {
