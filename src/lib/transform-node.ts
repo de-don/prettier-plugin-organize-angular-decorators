@@ -48,6 +48,9 @@ function prettifyDecorator(decorator: Decorator, options: ParserOptions & Plugin
   const orderMap: Record<string, string[]> = {
     Component: options.componentDecoratorOrder,
     Directive: options.directiveDecoratorOrder,
+    Pipe: options.pipeDecoratorOrder,
+    Injectable: options.injectableDecoratorOrder,
+    NgModule: options.moduleDecoratorOrder,
   };
 
   const order = orderMap[decoratorName];
