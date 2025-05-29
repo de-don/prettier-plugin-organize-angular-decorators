@@ -38,6 +38,18 @@ configuration file.
   "directiveDecoratorOrder": [
     "selector",
     "providers"
+  ],
+  "pipeDecoratorOrder": [
+    "name",
+    "pure"
+  ],
+  "injectableDecoratorOrder": [
+    "providedIn",
+    "deps"
+  ],
+  "moduleDecoratorOrder": [
+    "imports",
+    "declarations"
   ]
 }
 ```
@@ -69,6 +81,12 @@ If you want to run the plugin only in some directories, configure
   properties in `@Component` decorators.
 - **`directiveDecoratorOrder`** – array that defines the desired order of
   properties in `@Directive` decorators.
+- **`pipeDecoratorOrder`** – array that defines the desired order of
+  properties in `@Pipe` decorators.
+- **`injectableDecoratorOrder`** – array that defines the desired order of
+  properties in `@Injectable` decorators.
+- **`moduleDecoratorOrder`** – array that defines the desired order of
+  properties in `@NgModule` decorators.
 - **`angularOrganizePatterns`** – optional list of glob patterns. The plugin
   only runs on files matching these patterns. If the array is empty the plugin
   runs for all files.

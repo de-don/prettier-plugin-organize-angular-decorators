@@ -1,0 +1,6 @@
+{
+  "injectableDecoratorOrder": [
+    "providedIn",
+    "deps"
+  ]
+}

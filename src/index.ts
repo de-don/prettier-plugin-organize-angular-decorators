@@ -23,6 +23,27 @@ export const options: {
     description: 'Order of attributes in Directive decorator.',
     default: [{value: []}],
   },
+  pipeDecoratorOrder: {
+    type: 'string',
+    category: 'Global',
+    array: true,
+    description: 'Order of attributes in Pipe decorator.',
+    default: [{value: []}],
+  },
+  injectableDecoratorOrder: {
+    type: 'string',
+    category: 'Global',
+    array: true,
+    description: 'Order of attributes in Injectable decorator.',
+    default: [{value: []}],
+  },
+  moduleDecoratorOrder: {
+    type: 'string',
+    category: 'Global',
+    array: true,
+    description: 'Order of attributes in NgModule decorator.',
+    default: [{value: []}],
+  },
   angularOrganizePatterns: {
     type: 'string',
     category: 'Global',
