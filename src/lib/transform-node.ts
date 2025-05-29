@@ -22,25 +22,28 @@ export function transformNode<
   return node;
 }
 
-function prettifyDecorator(decorator: Decorator, options: ParserOptions & PluginOptions): void {
-  // console.log({decorator});
-  if (decorator.expression.type === 'CallExpression') {
-    if (decorator.expression.callee.type === 'Identifier') {
-      if (decorator.expression.callee.name === 'Component') {
-        const args = decorator.expression.arguments;
-        const config = args[0] as ObjectExpression;
-        if (config) {
-          config.properties = orderProperties(config.properties, options.componentDecoratorOrder);
-        }
-      }
-      if (decorator.expression.callee.name === 'Directive') {
-        const args = decorator.expression.arguments;
-        const config = args[0] as ObjectExpression;
-        if (config) {
-          config.properties = orderProperties(config.properties, options.directiveDecoratorOrder);
-        }
-      }
-    }
+function prettifyDecorator(
+  decorator: Decorator,
+  options: ParserOptions & PluginOptions,
+): void {
+  const {expression} = decorator;
+  if (expression.type !== 'CallExpression' || expression.callee.type !== 'Identifier') {
+    return;
+  }
+
+  const orders: Record<string, string[]> = {
+    Component: options.componentDecoratorOrder,
+    Directive: options.directiveDecoratorOrder,
+  };
+
+  const order = orders[expression.callee.name];
+  if (!order) {
+    return;
+  }
+
+  const config = expression.arguments[0] as ObjectExpression | undefined;
+  if (config) {
+    config.properties = orderProperties(config.properties, order);
   }
 }
 
@@ -48,17 +51,17 @@ function orderProperties<T extends ObjectMethod | ObjectProperty | SpreadElement
   properties: T[],
   order: string[],
 ): T[] {
-  const getOrder = (propName: string): number | undefined => {
-    const o = order.indexOf(propName);
-    return o === -1 ? undefined : o;
-  };
+  const orderMap = new Map(order.map((name, i) => [name, i]));
 
   return [...properties].sort((a, b) => {
-    const propertyA = a.type === 'SpreadElement' ? SPREAD_ELEMENT : 'name' in a.key ? a.key.name : undefined;
-    const propertyB = b.type === 'SpreadElement' ? SPREAD_ELEMENT : 'name' in b.key ? b.key.name : undefined;
+    const getName = (p: typeof a): string | undefined =>
+      p.type === 'SpreadElement' ? SPREAD_ELEMENT : 'name' in p.key ? p.key.name : undefined;
 
-    const orderA = propertyA ? getOrder(propertyA) : undefined;
-    const orderB = propertyB ? getOrder(propertyB) : undefined;
+    const propertyA = getName(a);
+    const propertyB = getName(b);
+
+    const orderA = propertyA ? orderMap.get(propertyA) : undefined;
+    const orderB = propertyB ? orderMap.get(propertyB) : undefined;
 
     if (orderA === undefined) {
       return orderB === undefined ? 0 : 1;
