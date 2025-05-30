@@ -3,7 +3,7 @@
     "useDefineForClassFields": false,
     "importHelpers": true,
     "declaration": true,
-    "module": "ES2020",
+    "module": "commonjs",
     "moduleResolution": "node",
     "lib": ["ES2020", "dom"],
     "target": "ES2020",
