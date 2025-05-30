@@ -1,14 +1,13 @@
-import type {InitialOptionsTsJest} from 'ts-jest';
+import type {JestConfigWithTsJest} from 'ts-jest';
 
-const config: InitialOptionsTsJest = {
-  preset: 'ts-jest/presets/js-with-ts-esm',
+const config: JestConfigWithTsJest = {
+  preset: 'ts-jest',
   testEnvironment: 'jsdom',
   transform: {
     '^.+\\.(ts|js|html)$': ['ts-jest', {
       tsconfig: {
         allowJs: true,
       },
-      useESM: true,
     }],
   },
   clearMocks: true,
